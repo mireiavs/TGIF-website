@@ -1,0 +1,112 @@
+.navigation {
+	background-color: #e2e1a7;
+	width: 100%;
+	padding-left: 50px;
+}
+
+.navbar {
+	padding: 0;
+}
+.navigation li a {
+	color: black;
+}
+
+.navigation li a:hover {
+	color: black;
+	background-color: #88b0b040;
+}
+
+.main-text {
+	margin: 25px 25px 25px 25px;
+	width: 95%;
+}
+
+footer {
+	background-color: #e2e1a7;
+	width: 100%;7
+	vertical-align: center;
+	padding: 15px 0 15px 0;
+}
+
+footer p {
+	margin-bottom: 0;
+	text-align: center;
+}
+
+header {
+	margin: 25px 25px 25px 25px;
+	display: flex;
+	align-items: center;
+}
+
+header a {
+	flex-grow: 1;
+	color: black;
+}
+
+header h1 {
+	margin-bottom: 0;
+	margin: 15px 15px 15px 15px;
+	color: #88B0B0;
+	font-family: 'Montserrat', sans-serif;
+	font-size: 50px;
+}
+
+.logo {
+	height: 100px;
+}
+
+.email {
+	text-align: right;
+}
+
+.party-filter {
+	display: flex;
+}
+
+.filters p {
+	margin-right: 25px;
+}
+
+.party-filter label {
+	margin-right: 15px;
+}
+
+.party-filter input {
+	margin-right: 5px;
+}
+
+.home-text {
+	display: flex;
+}
+
+.home-img img {
+	width: 300px;
+	margin: 50px 50px 50px 50px;
+}
+.filters {
+	display: flex;
+	justify-content: space-between;
+}
+.state-filter {
+	display: flex;
+	align-items: center;
+}
+.state-filter select {
+	margin-bottom: 16px;
+}
+.attendance {
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: nowrap;
+}
+.attendance-text {
+	max-width: 50%;
+}
+
+
+
+
+
+
+
