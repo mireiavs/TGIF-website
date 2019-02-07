@@ -8,7 +8,7 @@
 	<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 	<link rel="stylesheet" href="styles/main.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>TGIF - Attendance</title>
+	<title>TGIF - Senate - Attendance</title>
 </head>
 
 <body>
@@ -31,30 +31,30 @@
 				<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Attendance</a>
 				<ul class="dropdown-menu">
 					<li><a href="#" class="dropdown-item">Senate</a></li>
-					<li><a href="#" class="dropdown-item">House</a></li>
+					<li><a href="house-attendance.html" class="dropdown-item">House</a></li>
 				</ul>
 			</li>
 			<li class="nav-item dropdown">
 				<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Party Loyalty</a>
 				<ul class="dropdown-menu">
-					<li><a href="#" class="dropdown-item">Senate</a></li>
-					<li><a href="#" class="dropdown-item">House</a></li>
+					<li><a href="senate-party-loyalty.html" class="dropdown-item">Senate</a></li>
+					<li><a href="house-party-loyalty.html" class="dropdown-item">House</a></li>
 				</ul>
-			</li>
+			</li>		
 		</ul>
 	</nav>
 
 	<div class="container-fluid main-text">
 		<div class="attendance">
-			<div class="attendance-text">
+			<div class="tables-text">
 				<h2>Attendance</h2>
 				<p>The Constitution specifies that a majority of members constitutes a quorum to do business in each house. Representatives and senators rarely force the presence of a quorum by demanding quorum calls; thus, in most cases, debates continue even if a majority is not present.</p>
 
 				<p>The Senate uses roll-call votes; a clerk calls out the names of all the senators, each senator stating "aye" or "no" when his or her name is announced. The House reserves roll-call votes for the most formal matters, as a roll-call of all 435 representatives takes quite some time; normally, members vote by electronic device. In the case of a tie, the motion in question fails. In the Senate, the Vice President may (if present) cast the tiebreaking vote.</p>
 			</div>
-			<div class="attendance-table">
+			<div class="at-a-glance-table">
 				<h2>Senate at a glance</h2>
-				<table>
+				<table class="table text-center table-striped">
 					<thead>
 						<tr>
 							<th>Party</th>
@@ -62,115 +62,44 @@
 							<th>% Voted with Prty</th>
 						</tr>
 					</thead>
-					<tbody>
-						<tr id="at-a-glance-rep">
-							<td>Republican</td>
-						</tr>
-						<tr>
-							<td>Democrat</td>
-							<td>--</td>
-							<td>--</td>
-						</tr>
-						<tr>
-							<td>Independent</td>
-							<td>--</td>
-							<td>--</td>
-						</tr>
+					<tbody id="at-a-glance">
+
 					</tbody>
 				</table>
 			</div>
 		</div>
-		<h2>Least Engaged (Bottom 10% Attendance)</h2>
-		<table>
-			<thead>
-				<tr>
-					<th>Name</th>
-					<th>Number of Missed Votes</th>
-					<th>% Missed</th>
-				</tr>
-			</thead>
-			<tbody id="">
-				<tr>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-				</tr>
-				<tr>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-				</tr>
-				<tr>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-				</tr>
-				<tr>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-				</tr>
-				<tr>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-				</tr>
-				<tr>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-				</tr>
-			</tbody>
-		</table>
+		<div class="tables">
+			<div class="least-most">
+				<h2>Least Engaged (Bottom 10% Attendance)</h2>
+				<table class="table text-center table-striped">
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>Number of Missed Votes</th>
+							<th>% Missed</th>
+						</tr>
+					</thead>
+					<tbody id="least-engaged">
 
-		<h2>Most Engaged (Top 10% Attendance)</h2>
-		<table>
-			<thead>
-				<tr>
-					<th>Name</th>
-					<th>Number of Missed Votes</th>
-					<th>% Missed</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-				</tr>
-				<tr>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-				</tr>
-				<tr>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-				</tr>
-				<tr>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-				</tr>
-				<tr>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-				</tr>
-				<tr>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-				</tr>
-				<tr>
-					<td>--</td>
-					<td>--</td>
-					<td>--</td>
-				</tr>
-			</tbody>
-		</table>
+					</tbody>
+				</table>
+			</div>
+			<div class="least-most">
+				<h2>Most Engaged (Top 10% Attendance)</h2>
+				<table class="table text-center table-striped">
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>Number of Missed Votes</th>
+							<th>% Missed</th>
+						</tr>
+					</thead>
+					<tbody id="most-engaged">
 
+					</tbody>
+				</table>
+			</div>
+		</div>
 	</div>
 	<footer>
 		<p>&copy; 2016 TGIF | All rights reserved</p>
@@ -182,4 +111,5 @@
 	<script src="pro-congress-113-senate.js"></script>
 	<script src="main.js"></script>
 </body>
+
 </html>

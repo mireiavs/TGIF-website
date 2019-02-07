@@ -95,16 +95,31 @@ header h1 {
 .state-filter select {
 	margin-bottom: 16px;
 }
-.attendance {
+.attendance, .loyalty {
 	display: flex;
 	justify-content: space-between;
 	flex-wrap: nowrap;
 }
-.attendance-text {
+.tables-text {
 	max-width: 50%;
 }
-
-
+.at-a-glance-table {
+	text-align: center;
+	margin: 25px 25px 25px 25px;
+}
+.tables {
+	display: flex;
+	border-top: 1px solid grey;
+	padding-top: 20px;
+}
+.least-most {
+	margin: 25px 25px 25px 25px;
+	flex-grow: 1;
+	text-align: center;
+}
+.member-list tr td:first-child {
+	width: 270px;
+}
 
 
 

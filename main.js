@@ -6,11 +6,13 @@
 //	document.getElementById("table-data").innerHTML += "<tr><td>" + "<a href=" + membersArr[i].url + " target=\"_blank\">" + membersArr[i].first_name + " " + (membersArr[i].middle_name || "") + " " + membersArr[i].last_name + "</a></td><td>" + membersArr[i].party + "</td><td>" + membersArr[i].state + "</td><td>" + membersArr[i].seniority + "</td><td>" + membersArr[i].votes_with_party_pct + "%</td></tr>";
 //}
 
-var membersArr = data.results[0].members;
+//var membersArr = data.results[0].members;
 
-if (document.getElementById("table-data") !== null) {
-	window.onload = createTable(membersArr);
+if (document.getElementById("table-data")) {
+	var membersArr = data.results[0].members;
+	createTable(membersArr);
 }
+
 
 function createTable(array) {
 	for (var i = 0; i < array.length; i++) {
@@ -32,7 +34,7 @@ function createTable(array) {
 
 
 //CREATE DROPDOWN MENU (STATES ORDERED ALPHABETICALLY)
-if (document.getElementById("state-filter") !== null) {
+if (document.getElementById("state-filter")) {
 	document.getElementById("state-filter").onchange = updateUI;
 	var states = [];
 	for (var i = 0; i < membersArr.length; i++) {
@@ -56,7 +58,7 @@ for (k = 0; k < checkboxes.length; k++) {
 
 
 //READ MORE/READ LESS
-if (document.getElementById("readmore") !== null) {
+if (document.getElementById("readmore")) {
 	document.getElementById("readmore").onclick =
 		function () {
 			if (document.getElementById("readmore").innerHTML === "Read more") {
@@ -67,6 +69,7 @@ if (document.getElementById("readmore") !== null) {
 		}
 }
 
+//FILTER FUNCTIONS
 //function filterByParty() {
 //	var selectedParties = Array.from(document.querySelectorAll("input[name=party]:checked")).map(selparty => selparty.value);
 //
@@ -101,9 +104,6 @@ if (document.getElementById("readmore") !== null) {
 //	}
 //}
 
-
-
-//FILTER FUNCTIONS
 function updateUI2() {
 	var selectedParties = Array.from(document.querySelectorAll("input[name=party]:checked")).map(selparty => selparty.value);
 
@@ -195,16 +195,13 @@ function updateUI() {
 }
 
 
-//STATISTICS
+//STATISTICS-----------------------------------------
 
 function getPartyList(party) {
-	var partyList = [];
-	membersArr.forEach(function (member) {
-		if (member.party === party) {
-			partyList.push(member);
-		}
-	})
-	return partyList;
+	var membersArr = data.results[0].members;
+	return membersArr.filter(function (member) {
+		return member.party === party
+	});
 }
 
 function getAvgVotesWithParty(party) {
@@ -216,66 +213,247 @@ function getAvgVotesWithParty(party) {
 	return total / partyList.length;
 }
 
-function getLowest(parameter) {
-	var membersArr2 = membersArr.slice(0)
+//function getLowest(parameter) {
+//	var membersArr2 = membersArr.slice(0);
+//	var membersArrLen = membersArr2.length;
+//	var lowestMembersArr = [];
+//	var memberPercentage = 0;
+//
+//	while (memberPercentage <= 0.1) {
+//		var lowestVotesPercentage = 100;
+//		var lowestMember;
+//		for (var i = 0; i < membersArr2.length; i++) {
+//			if (membersArr2[i][parameter] < lowestVotesPercentage) {
+//				lowestVotesPercentage = membersArr2[i][parameter];
+//				lowestMember = membersArr2[i];
+//			}
+//		}
+//		lowestMembersArr.push(lowestMember);
+//		membersArr2.splice(membersArr2.indexOf(lowestMember), 1);
+//		memberPercentage = lowestMembersArr.length / membersArrLen;
+//	}
+//	return lowestMembersArr;
+//}
+
+//function getLowest(percentageToCheck) {
+//	var membersArr = data.results[0].members;
+//	var membersArr2 = membersArr.slice(0);
+//	var membersArrLen = membersArr2.length;
+//	var lowestMembersArr = [];
+//	var memberPercentage = 0;
+//
+//	while (memberPercentage < 0.1) {
+//		var lowestVotesPercentage = 100;
+//		var lowestMember;
+//		membersArr2.forEach(member => {
+//			if (member[percentageToCheck] < lowestVotesPercentage) {
+//				lowestVotesPercentage = member[percentageToCheck];
+//				lowestMember = member;
+//			}
+//		})
+//		lowestMembersArr.push(lowestMember);
+//		membersArr2.splice(membersArr2.indexOf(lowestMember), 1);
+//
+//		var timesPctAppears = membersArr2.filter((member) => (member[percentageToCheck] === lowestVotesPercentage)).length;
+//
+//		if (timesPctAppears > 0) {
+//			membersArr2.forEach(member => {
+//				if (member[percentageToCheck] === lowestVotesPercentage) {
+//					lowestMember = member;
+//					lowestMembersArr.push(lowestMember);
+//					membersArr2.splice(membersArr2.indexOf(lowestMember), 1);
+//				}
+//			})
+//		}
+//		memberPercentage = lowestMembersArr.length / membersArrLen;
+//	}
+//	return lowestMembersArr;
+//}
+
+
+function getTenPercent(parameterToCheck, highOrLow) {
+	var membersArr = data.results[0].members;
+	var membersArr2 = membersArr.slice(0);
 	var membersArrLen = membersArr2.length;
-	var lowestMembersArr = [];
+	var finalMembersArr = [];
 	var memberPercentage = 0;
 
 	while (memberPercentage < 0.1) {
-		var lowestPercentage = 100;
-		var lowestMember;
-		for (var i = 0; i < membersArr2.length; i++) {
-			if (membersArr2[i][parameter] < lowestPercentage) {
-				lowestPercentage = membersArr2[i][parameter];
-				lowestMember = membersArr2[i];
-			}
+		var memberToInclude;
+		if (highOrLow === "low") {
+			var controlVotesPercentage = 100;
+			var memberToInclude;
+			membersArr2.forEach(member => {
+				if (member[parameterToCheck] < controlVotesPercentage) {
+					controlVotesPercentage = member[parameterToCheck];
+					memberToInclude = member;
+				}
+			})
+		} else if (highOrLow === "high") {
+			var controlVotesPercentage = 0;
+			var memberToInclude;
+			membersArr2.forEach(member => {
+				if (member[parameterToCheck] > controlVotesPercentage) {
+					controlVotesPercentage = member[parameterToCheck];
+					memberToInclude = member;
+				}
+			})
 		}
-		lowestMembersArr.push(lowestMember);
-		membersArr2.splice(membersArr2.indexOf(lowestMember), 1);
-		memberPercentage = lowestMembersArr.length / membersArrLen;
+		finalMembersArr.push(memberToInclude);
+		membersArr2.splice(membersArr2.indexOf(memberToInclude), 1);
+
+		var timesPctAppears = membersArr2.filter((member) => (member[parameterToCheck] === controlVotesPercentage)).length;
+
+		if (timesPctAppears > 0) {
+			membersArr2.forEach(member => {
+				if (member[parameterToCheck] === controlVotesPercentage) {
+					memberToInclude = member;
+					finalMembersArr.push(memberToInclude);
+					membersArr2.splice(membersArr2.indexOf(memberToInclude), 1);
+				}
+			})
+		}
+		memberPercentage = finalMembersArr.length / membersArrLen;
 	}
-	return lowestMembersArr;
+	return finalMembersArr;
 }
 
-function getHighest(parameter) {
-	var membersArr2 = membersArr.slice(0)
-	var membersArrLen = membersArr2.length;
-	var highestMembersArr = [];
-	var memberPercentage = 0;
 
-	while (memberPercentage < 0.1) {
-		var highestPercentage = 0;
-		var highestMember;
-		for (var i = 0; i < membersArr2.length; i++) {
-			if (membersArr2[i][parameter] > highestPercentage) {
-				highestPercentage = membersArr2[i][parameter];
-				highestMember = membersArr2[i];
-			}
-		}
-		highestMembersArr.push(highestMember);
-		membersArr2.splice(membersArr2.indexOf(highestMember), 1);
-		memberPercentage = highestMembersArr.length / membersArrLen;
-	}
-	return highestMembersArr;
-}
 
-var lowestLoyalty = getLowest("votes_with_party_pct");
-var highestLoyalty = getHighest("votes_with_party_pct");
-var lowestMissedVotes = getLowest("missed_votes_pct");
-var highestMissedVotes = getHighest("missed_votes_pct");
+//HIGHEST 10%
+
+//function getHighest(percentageToCheck) {
+//	var membersArr = data.results[0].members;
+//	var membersArr2 = membersArr.slice(0)
+//	var membersArrLen = membersArr2.length;
+//	var highestMembersArr = [];
+//	var memberPercentage = 0;
+//
+//	while (memberPercentage < 0.1) {
+//		var highestVotesPercentage = 0;
+//		var highestMember;
+//
+//		membersArr2.forEach(member => {
+//			if (member[percentageToCheck] > highestVotesPercentage) {
+//				highestVotesPercentage = member[percentageToCheck];
+//				highestMember = member;
+//			}
+//		})
+//		highestMembersArr.push(highestMember);
+//		membersArr2.splice(membersArr2.indexOf(highestMember), 1);
+//
+//		var timesPctAppears = membersArr2.filter((member) => (member[percentageToCheck] === highestVotesPercentage)).length;
+//
+//		if (timesPctAppears > 0) {
+//			membersArr2.forEach(member => {
+//				if (member[percentageToCheck] === highestVotesPercentage) {
+//					highestMember = member;
+//					highestMembersArr.push(highestMember);
+//					membersArr2.splice(membersArr2.indexOf(highestMember), 1);
+//				}
+//			})
+//		}
+//		memberPercentage = highestMembersArr.length / membersArrLen;
+//	}
+//	return highestMembersArr;
+//}
 
 var statistics = {
-	"Number of Democrats": getPartyList("D").length,
-	"Number of Republicans": getPartyList("R").length,
-	"Number of Independents": getPartyList("I").length,
-	"Democrats Average Votes with Party": getAvgVotesWithParty("D"),
-	"Republicans Average Votes with Party": getAvgVotesWithParty("R"),
-	"Independents Average Votes with Party": getAvgVotesWithParty("I"),
-	"Least Loyal": lowestLoyalty,
-	"Most Loyal": highestLoyalty,
-	"Least Engaged": highestMissedVotes,
-	"Most Engaged": lowestMissedVotes,
+	"Parties": [{
+		"Name": "Democrats",
+		"Number of Reps": getPartyList("D").length,
+		"Avg Votes with Party": getAvgVotesWithParty("D")
+	}, {
+		"Name": "Republicans",
+		"Number of Reps": getPartyList("R").length,
+		"Avg Votes with Party": getAvgVotesWithParty("R")
+	}, {
+		"Name": "Independents",
+		"Number of Reps": getPartyList("I").length,
+		"Avg Votes with Party": getAvgVotesWithParty("I")
+	}],
+	"Least Loyal": getTenPercent("votes_with_party_pct", "low"),
+	"Most Loyal": getTenPercent("votes_with_party_pct", "high"),
+	"Least Engaged": getTenPercent("missed_votes_pct", "high"),
+	"Most Engaged": getTenPercent("missed_votes_pct", "low")
 };
 
+function createAtAGlanceTable() {
+	var partiesArr = statistics["Parties"];
+	partiesArr.forEach(party => {
+		var newRow = document.createElement("tr");
+		newRow.insertCell().innerHTML = party["Name"];
+		newRow.insertCell().innerHTML = party["Number of Reps"];
+		newRow.insertCell().innerHTML = (Math.round(party["Avg Votes with Party"] * 100) / 100 || "0") + "%";
+		document.getElementById("at-a-glance").append(newRow);
+	})
 
+	var totalReps = 0;
+	partiesArr.forEach(function (party) {
+		totalReps = totalReps + party["Number of Reps"];
+	})
+	
+	var totalPcts = 0;
+	partiesArr.forEach(function (party) {
+		if (party["Number of Reps"] === 0) {
+			partiesArr.splice(partiesArr.indexOf(party));
+		}
+		totalPcts = totalPcts + (party["Avg Votes with Party"] || 0);
+	})
+	
+	var totalAvg = Math.round(totalPcts / partiesArr.length *100) / 100;
+	
+	var totalRow = document.createElement("tr");
+	totalRow.insertCell().innerHTML = "Total";
+	totalRow.insertCell().innerHTML = totalReps;
+	totalRow.insertCell().innerHTML = totalAvg + "%";
+	document.getElementById("at-a-glance").append(totalRow);
+}
+
+
+
+function createAttLoyTables(tbodyId, thingToShow) {
+	var membersToShow = statistics[thingToShow];
+	for (var i = 0; i < membersToShow.length; i++) {
+		var row = document.createElement("tr");
+		var link = document.createElement("a");
+		link.setAttribute("href", membersToShow[i].url);
+		link.setAttribute("target", "_blank");
+		link.append(`${membersToShow[i].first_name} ${(membersToShow[i].middle_name || "")} ${membersToShow[i].last_name}`);
+		row.insertCell().append(link);
+
+		if (tbodyId === "least-engaged" || tbodyId === "most-engaged") {
+			row.insertCell().innerHTML = membersToShow[i].missed_votes;
+			row.insertCell().innerHTML = membersToShow[i].missed_votes_pct + "%";
+		}
+
+		if (tbodyId === "least-loyal" || tbodyId === "most-loyal") {
+			var votesWithParty = Math.round(membersToShow[i].total_votes * membersToShow[i].votes_with_party_pct / 100);
+			row.insertCell().innerHTML = votesWithParty;
+			row.insertCell().innerHTML = membersToShow[i].votes_with_party_pct + "%";
+		}
+		document.getElementById(tbodyId).append(row);
+	}
+}
+
+
+if (document.getElementById("at-a-glance")) {
+	createAtAGlanceTable();
+	if (document.getElementById("least-engaged")) {
+		createAttLoyTables("least-engaged", "Least Engaged");
+		createAttLoyTables("most-engaged", "Most Engaged");
+	}
+	if (document.getElementById("least-loyal")) {
+		createAttLoyTables("least-loyal", "Least Loyal");
+		createAttLoyTables("most-loyal", "Most Loyal");
+	}
+}
+
+//console.log(JSON.stringify(statistics, null, 2))
+
+
+//	for (var i = 0; i < membersArr.length; i++) {
+//		if (membersArr[i].missed_votes_pct === 0.42) {
+//			console.log(membersArr[i].first_name + " " + membersArr[i].last_name);
+//		}
+//	}
