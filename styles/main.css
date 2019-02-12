@@ -121,7 +121,6 @@ header h1 {
 	width: 270px;
 }
 
-
-
-
-
+.error-msg {
+	text-align: center;
+}

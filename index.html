@@ -11,7 +11,7 @@
 	<title>TGIF - Home</title>
 </head>
 
-<body>
+<body id="index">
 	<header>
 		<a href="#"><img src="images/logo-2721837_1280_only.jpg" alt="TGIF logo" class="logo"></a>
 		<h1>TRANSPARENT GOVERNMENT IN FACT</h1>
@@ -43,7 +43,7 @@
 			</li>
 		</ul>
 	</nav>
-	<div class="container-fluid main-text">
+	<div class="container-fluid main-text" id="app">
 		<div class="home-text">
 			<div class="text-only">
 				<h2>About Us</h2>
@@ -60,7 +60,7 @@
 			<div class="card">
 				<div class="card-header" id="headingOne">
 					<h5 class="mb-0">
-						<button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" id="readmore">Read more</button>
+						<button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" id="readmore" @click=changeAccordionText>{{ accordionMessage}} </button>
 					</h5>
 				</div>
 				<div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">

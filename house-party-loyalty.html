@@ -11,7 +11,7 @@
 	<title>TGIF - House - Party Loyalty</title>
 </head>
 
-<body>
+<body id="house">
 	<header>
 		<a href="#"><img src="images/logo-2721837_1280_only.jpg" alt="TGIF logo" class="logo"></a>
 		<h1>TRANSPARENT GOVERNMENT IN FACT</h1>
@@ -43,7 +43,7 @@
 			</li>
 		</ul>
 	</nav>
-	<div class="container-fluid main-text">
+	<div class="container-fluid main-text" id="app">
 		<div class="loyalty">
 			<div class="tables-text">
 				<h2>Party Loyalty</h2>
@@ -60,8 +60,19 @@
 						</tr>
 					</thead>
 					<tbody id="at-a-glance">
-
+						<tr v-for="party in parties">
+							<td>{{ party.name }}</td>
+							<td>{{ party.numberOfReps }}</td>
+							<td>{{ party.avgVoteswParty || 0 }}%</td>
+						</tr>
 					</tbody>
+					<tfoot>
+						<tr>
+							<td>Total</td>
+							<td>{{ totalReps() }}</td>
+							<td>{{ totalAvgVotes() }}%</td>
+						</tr>
+					</tfoot>
 				</table>
 			</div>
 		</div>
@@ -77,12 +88,15 @@
 						</tr>
 					</thead>
 					<tbody id="least-loyal">
-
+						<tr v-for="member in leastLoyal">
+							<td><a :href="member.url" target="_blank">{{ member.first_name }} {{ member.middle_name }} {{ member.last_name }}</a></td>
+							<td>{{ Math.round(member.total_votes*member.votes_with_party_pct/100) }}</td>
+							<td>{{ member.votes_with_party_pct }}%</td>
+						</tr>
 
 					</tbody>
 				</table>
 			</div>
-
 			<div class="least-most">
 				<h2>Most Loyal (Top 10% of Party)</h2>
 				<table class="table text-center table-striped">
@@ -94,7 +108,11 @@
 						</tr>
 					</thead>
 					<tbody id="most-loyal">
-
+						<tr v-for="member in mostLoyal">
+							<td><a :href="member.url" target="_blank">{{ member.first_name }} {{ member.middle_name }} {{ member.last_name }}</a></td>
+							<td>{{ Math.round(member.total_votes*member.votes_with_party_pct/100) }}</td>
+							<td>{{ member.votes_with_party_pct }}%</td>
+						</tr>
 					</tbody>
 				</table>
 			</div>
@@ -107,7 +125,7 @@
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
-	<script src="pro-congress-113-house.js"></script>
+	<!--	<script src="pro-congress-113-house.js"></script>-->
 	<script src="main.js"></script>
 </body>
 
