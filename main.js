@@ -25,8 +25,8 @@ var app = new Vue({
 	computed: {
 		orderedStates() {
 			var states = [];
-			this.members.forEach(function (member) {
-				if (states.includes(member.state) == false) {
+			this.members.forEach(member => {
+				if (!states.includes(member.state)) {
 					states.push(member.state);
 				}
 			});
@@ -57,13 +57,10 @@ var app = new Vue({
 					this.members = ppObject.results[0].members;
 					this.getStatistics();
 				})
-				.catch(error =>
-					console.log(error)
-				)
+				.catch(error => console.log(error))
 		},
 		getPartyList(party) {
-			return this.members.filter(member => member.party === party
-			);
+			return this.members.filter(member => member.party === party);
 		},
 		getAvgVotesWithParty(party) {
 			var partyList = this.getPartyList(party);
@@ -131,14 +128,13 @@ var app = new Vue({
 			this.mostEngaged = this.getTenPercent("missed_votes_pct", "low");
 		},
 		totalReps() {
-			return this.parties.reduce(function (total, x) {
-				return total + x.numberOfReps;
+			return this.parties.reduce((total, party) => {
+				return total + party.numberOfReps;
 			}, 0);
 		},
 		totalAvgVotes() {
 			var partiesWithMembers = this.parties.filter(party =>
 				party.numberOfReps > 0);
-
 			return Math.round(partiesWithMembers.reduce(function (total, x) {
 				return total + x.avgVoteswParty;
 			}, 0) / partiesWithMembers.length * 100) / 100;

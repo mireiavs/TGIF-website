@@ -120,7 +120,7 @@ header h1 {
 .member-list tr td:first-child {
 	width: 270px;
 }
-
-.error-msg {
+.no-members {
 	text-align: center;
+	font-weight: bold;
 }
