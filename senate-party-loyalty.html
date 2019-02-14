@@ -12,37 +12,13 @@
 </head>
 
 <body id="senate">
+	<div id="app">
 	<header>
 		<a href="#"><img src="images/logo-2721837_1280_only.jpg" alt="TGIF logo" class="logo"></a>
 		<h1>TRANSPARENT GOVERNMENT IN FACT</h1>
 		<a href="mailto:info@tgif.net" class="email"><i class="far fa-envelope"></i> info@tgif.net</a>
 	</header>
-	<nav class="navbar navbar-expand-sm">
-		<ul class="navbar-nav navigation">
-			<li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
-			<li class="nav-item dropdown">
-				<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Congress 113</a>
-				<ul class="dropdown-menu">
-					<li><a href="senate-data.html" class="dropdown-item">Senate</a></li>
-					<li><a href="house-data.html" class="dropdown-item">House</a></li>
-				</ul>
-			</li>
-			<li class="nav-item dropdown">
-				<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Attendance</a>
-				<ul class="dropdown-menu">
-					<li><a href="senate-attendance.html" class="dropdown-item">Senate</a></li>
-					<li><a href="#" class="dropdown-item">House</a></li>
-				</ul>
-			</li>
-			<li class="nav-item dropdown">
-				<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Party Loyalty</a>
-				<ul class="dropdown-menu">
-					<li><a href="#" class="dropdown-item">Senate</a></li>
-					<li><a href="house-party-loyalty.html" class="dropdown-item">House</a></li>
-				</ul>
-			</li>
-		</ul>
-	</nav>
+	<nav-component></nav-component>
 	<div class="container-fluid main-text" id="app">
 		<div class="loyalty">
 			<div class="tables-text">
@@ -51,7 +27,8 @@
 			</div>
 			<div class="at-a-glance-table">
 				<h2>Senate at a glance</h2>
-				<table class="table text-center table-striped">
+				<loader v-if="members.length === 0"></loader>
+				<table v-else class="table text-center table-striped">
 					<thead>
 						<tr>
 							<th>Party</th>
@@ -79,7 +56,8 @@
 		<div class="tables">
 			<div class="least-most">
 				<h2>Least Loyal (Bottom 10% of Party)</h2>
-				<table class="table text-center table-striped">
+				<loader v-if="members.length === 0"></loader>
+				<table v-else class="table text-center table-striped">
 					<thead>
 						<tr>
 							<th>Name</th>
@@ -99,7 +77,8 @@
 
 			<div class="least-most">
 				<h2>Most Loyal (Top 10% of Party)</h2>
-				<table class="table text-center table-striped">
+				<loader v-if="members.length === 0"></loader>
+				<table v-else class="table text-center table-striped">
 					<thead>
 						<tr>
 							<th>Name</th>
@@ -118,6 +97,7 @@
 			</div>
 		</div>
 	</div>
+	</div>
 	<footer>
 		<p>&copy; 2016 TGIF | All rights reserved</p>
 	</footer>
@@ -126,6 +106,8 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
 	<!--	<script src="pro-congress-113-senate.js"></script>-->
+	<script src="nav-component.js"></script>
+	<script src="loader-component.js"></script>
 	<script src="main.js"></script>
 </body>
 

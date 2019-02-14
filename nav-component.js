@@ -5,7 +5,7 @@ Vue.component("nav-component", {
 			<li class="nav-item dropdown">
 				<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Congress 113</a>
 				<ul class="dropdown-menu">
-					<li><a href="#" class="dropdown-item">Senate</a></li>
+					<li><a href="senate-data.html" class="dropdown-item">Senate</a></li>
 					<li><a href="house-data.html" class="dropdown-item">House</a></li>
 				</ul>
 			</li>
@@ -25,4 +25,5 @@ Vue.component("nav-component", {
 			</li>
 		</ul>
 	</nav>`
-})
+	}	
+)

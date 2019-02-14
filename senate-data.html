@@ -18,13 +18,13 @@
 			<h1>TRANSPARENT GOVERNMENT IN FACT</h1>
 			<a href="mailto:info@tgif.net" class="email"><i class="far fa-envelope"></i> info@tgif.net</a>
 		</header>
-		<nav-component>
-		</nav-component>
+		<nav-component></nav-component>
 		<div class="container-fluid main-text">
 			<h2>Senators</h2>
 			<p>First convened in 1789, the composition and powers of the Senate are established in Article One of the U.S. Constitution. Each state is represented by two senators, regardless of population, who serve staggered six-year terms. The Senate has several exclusive powers not granted to the House, including consenting to treaties as a precondition to their ratification and consenting to or confirming appointments of Cabinet secretaries, federal judges, other federal executive officials, military officers, regulatory officials, ambassadors, and other federal uniformed officers, as well as trial of federal officials impeached by the House.</p>
 		</div>
-		<div class="container-fluid main-text">
+		<loader v-if="members.length === 0"></loader>
+		<div class="container-fluid main-text" v-else>
 			<div class="filters">
 				<div class="party-filter">
 					<p>Filter by Party: </p>
@@ -66,11 +66,10 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
 	<!--	<script src="pro-congress-113-senate.js"></script>-->
-	<script src="main.js"></script>
-	<script src="member-component.js"></script>
 	<script src="nav-component.js"></script>
-
-
+	<script src="member-component.js"></script>
+	<script src="loader-component.js"></script>
+	<script src="main.js"></script>
 </body>
 
 </html>
