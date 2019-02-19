@@ -18,7 +18,7 @@ var app = new Vue({
 		accordionMessage: "Read more"
 	},
 	created() {
-		if (!document.getElementById("index")) {
+		if (!location.pathname.includes("index")) {
 			this.getData();
 		}
 	},
@@ -34,17 +34,17 @@ var app = new Vue({
 		},
 		filteredMembers() {
 			return this.members.filter(member => {
-				var filterParty = this.selectedParties.includes(member.party) || this.selectedParties.length == 0;
-				var filterState = this.selectedState == member.state || this.selectedState === "";
+				var filterParty = this.selectedParties.includes(member.party) || this.selectedParties.length === 0;
+				var filterState = this.selectedState === member.state || this.selectedState === "";
 				return filterParty && filterState;
 			});
 		},
 	},
 	methods: {
 		getData() {
-			if (document.getElementById("senate")) {
+			if (location.pathname.includes("senate")) {
 				var url = " https://api.propublica.org/congress/v1/113/senate/members.json"
-			} else if (document.getElementById("house")) {
+			} else if (location.pathname.includes("house")) {
 				var url = " https://api.propublica.org/congress/v1/113/house/members.json"
 			};
 			fetch(url, {
@@ -72,7 +72,6 @@ var app = new Vue({
 		},
 		getTenPercent(parameterToCheck, highOrLow) {
 			var membersArr2 = this.members.slice(0);
-			var membersArrLen = membersArr2.length;
 			var finalMembersArr = [];
 			var memberPercentage = 0;
 
@@ -111,7 +110,7 @@ var app = new Vue({
 						}
 					})
 				}
-				memberPercentage = finalMembersArr.length / membersArrLen;
+				memberPercentage = finalMembersArr.length / this.members.length;
 			}
 			return finalMembersArr;
 		},
@@ -135,7 +134,7 @@ var app = new Vue({
 		totalAvgVotes() {
 			var partiesWithMembers = this.parties.filter(party =>
 				party.numberOfReps > 0);
-			return Math.round(partiesWithMembers.reduce(function (total, x) {
+			return Math.round(partiesWithMembers.reduce((total, x) => {
 				return total + x.avgVoteswParty;
 			}, 0) / partiesWithMembers.length * 100) / 100;
 		},
