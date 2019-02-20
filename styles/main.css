@@ -1,3 +1,4 @@
+
 .navigation {
 	background-color: #e2e1a7;
 	width: 100%;
@@ -7,6 +8,7 @@
 .navbar {
 	padding: 0;
 }
+
 .navigation li a {
 	color: black;
 }
@@ -17,17 +19,15 @@
 }
 
 .main-text {
-	margin: 25px 25px 25px 25px;
+	margin: 25px auto 25px auto;
 	width: 95%;
 }
 
 footer {
 	background-color: #e2e1a7;
-	width: 100%;7
-	vertical-align: center;
-	padding: 15px 0 15px 0;
+	width: 100%;
+	padding: 5px 0 5px 0;
 }
-
 footer p {
 	margin-bottom: 0;
 	text-align: center;
@@ -84,79 +84,106 @@ header h1 {
 	width: 300px;
 	margin: 50px 50px 50px 50px;
 }
+
 .filters {
 	display: flex;
 	justify-content: space-between;
 }
+
 .state-filter {
 	display: flex;
 	align-items: center;
 }
+
 .state-filter select {
 	margin-bottom: 16px;
 }
-.attendance, .loyalty {
+
+.attendance,
+.loyalty {
 	display: flex;
 	justify-content: space-between;
 	flex-wrap: nowrap;
 }
+
 .tables-text {
 	max-width: 50%;
 }
+
 .at-a-glance-table {
 	text-align: center;
 	margin: 25px 25px 25px 25px;
 }
+
 .tables {
 	display: flex;
 	border-top: 1px solid grey;
 	padding-top: 20px;
+}
+.table {
+	margin-bottom: 50px;
 }
 .least-most {
 	margin: 25px 25px 25px 25px;
 	flex-grow: 1;
 	text-align: center;
 }
+
 .member-list tr td:first-child {
 	width: 270px;
 }
+
 .no-members {
 	text-align: center;
 	font-weight: bold;
 }
+
 /*LOADER*/
 .lds-ring {
-  display: flex;
+	display: flex;
 	justify-content: space-around;
-  height: 64px;
+	height: 64px;
 	margin: 30px 30px 30px 30px;
 }
+
 .lds-ring div {
-  box-sizing: border-box;
-  display: block;
-  position: absolute;
-  width: 51px;
-  height: 51px;
-  margin: 6px;
-  border: 6px solid #88B0B0;
-  border-radius: 50%;
-  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-  border-color: #88B0B0 transparent transparent transparent;
+	box-sizing: border-box;
+	display: block;
+	position: absolute;
+	width: 51px;
+	height: 51px;
+	margin: 6px;
+	border: 6px solid #88B0B0;
+	border-radius: 50%;
+	animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+	border-color: #88B0B0 transparent transparent transparent;
 }
+
 .lds-ring div:nth-child(1) {
-  animation-delay: -0.45s;
+	animation-delay: -0.45s;
 }
+
 .lds-ring div:nth-child(2) {
-  animation-delay: -0.3s;
+	animation-delay: -0.3s;
 }
+
 .lds-ring div:nth-child(3) {
-  animation-delay: -0.15s;
+	animation-delay: -0.15s;
 }
+
 @keyframes lds-ring {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
+	0% {
+		transform: rotate(0deg);
+	}
+
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+
+
+
+.card-header {
+	margin-bottom: 30px;
 }
